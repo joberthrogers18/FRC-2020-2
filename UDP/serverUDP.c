@@ -1,6 +1,3 @@
-/*
-    Exemplo de Servidor UDP    
-*/
 #include <stdio.h> 
 #include <string.h>
 #include <stdlib.h> 
@@ -8,10 +5,11 @@
 #include <sys/socket.h>
 #include <unistd.h>
  
-#define TAMANHO 1024  
-#define PORTA 8080  
+#define SIZE 2048  
+#define PORT 8080  
 
 int option = -1;
+int port = 8080;
 
 void printMenu() {
   printf("======= Server Socket =======\n");
@@ -22,13 +20,16 @@ void printMenu() {
 int main(void)
 {
     struct sockaddr_in si_me, si_other;
-    int socket_servidor;
+    int socket_server;
     int s, i, recv_len;
     socklen_t slen = sizeof(si_other);
-    char buffer[TAMANHO];
-    char message[TAMANHO];
+    char buffer[SIZE];
+    char message[SIZE];
+
+    printf("\nDigite a porta do servidor:\n");
+	scanf("%d", &port);
      
-    if ((socket_servidor = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
+    if ((socket_server = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
     {
         printf("Erro na abertura do socket\n");
         exit(1);
@@ -37,10 +38,10 @@ int main(void)
     memset((char *) &si_me, 0, sizeof(si_me));
      
     si_me.sin_family = AF_INET;
-    si_me.sin_port = htons(PORTA);
+    si_me.sin_port = htons(PORT);
     si_me.sin_addr.s_addr = htonl(INADDR_ANY);
      
-    if( bind(socket_servidor , (struct sockaddr*)&si_me, sizeof(si_me) ) == -1)
+    if( bind(socket_server , (struct sockaddr*)&si_me, sizeof(si_me) ) == -1)
     {
         printf("Erro no bind\n");
         exit(1);
@@ -48,7 +49,7 @@ int main(void)
      
     while(option != 0)
     {         
-        if ((recv_len = recvfrom(socket_servidor, buffer, TAMANHO, 0, (struct sockaddr *) &si_other, &slen)) == -1)
+        if ((recv_len = recvfrom(socket_server, buffer, SIZE, 0, (struct sockaddr *) &si_other, &slen)) == -1)
         {
             printf("Erro no recvfrom()\n");
             exit(1);
@@ -66,7 +67,7 @@ int main(void)
                     printf("\nMensagem a ser enviada : ");
                     scanf("%s", message);
 
-                    if (sendto(socket_servidor, message, recv_len, 0, (struct sockaddr*) &si_other, slen) == -1)
+                    if (sendto(socket_server, message, recv_len, 0, (struct sockaddr*) &si_other, slen) == -1)
                     {
                         printf("Erro no sendto()\n");
                         exit(1);
@@ -80,6 +81,6 @@ int main(void)
         }
     }
  
-    close(socket_servidor);
+    close(socket_server);
     return 0;
 }
