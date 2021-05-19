@@ -25,24 +25,40 @@ Para rodar o cliente:
 
 ## Questão 1
 
+### Enunciado
+
 Crie uma aplicação UDP simples, cujo fluxo de diálogo entre Cliente e Servidor seja bidirecional. Ou seja, os dois lados (cliente e servidor) enviam e recebem mensagens de um para o outro.
+
+### Imagem da execução
 
 ![q1](./assets/q1.png)
 
 ## Questão 2
 
+### Enunciado
+
 Crie uma aplicação TCP, para diálogo cliente/servidor, para diálogo bidirecional, cujo lado servidor permaneça com a conexão ativa até que o cliente informe ao servidor que não há mais nada a enviar; quando isso ocorrer, apenas o cliente encerra a conexão, mas o servidor deve continuar ativo, aguardando novas conexões.
+
+### Imagem da execução
 
 ![questao2](./assets/q2tcp.png)
 
 ## Questão 3
 
+### Enunciado
+
 Crie um código TCP, no qual o servidor consiga atender mais de cliente ao mesmo tempo, para promover diálogo bidirecional (half-duplex, ou seja, enquanto um dos lados fala o outro escuta e vice-versa, numa ordem pré-definida), usando a system call fork(). Nos testes de validação, é importante que vários clientes possam dialogar com o servidor, mas não é necessário que clientes dialoguem entre si.
+
+### Imagem da execução
 
 ![q3](./assets/q3.png)
 
 ## Questão 4
 
+### Enunciado
+
 O aluno deve pesquisar a system call select() e produzir novo código TCP, de modo a implementar um código TCP no qual os clientes se conectem ao servidor TCP e consigam dialogar entre si, num diálogo full-duplex, ou seja, os dois lados podem iniciar o diálogo, sem uma ordem pré-definida. Nesse caso, tudo o que um usuário digitar deve chegar aos pares conectados ao servidor TCP naquele momento. Obs.: Uma referência sobre essa system call pode ser encontrada em https://man7.org/linux/man- pages/man2/select.2.html.
+
+### Imagem da execução
 
 ![q4](./assets/q4.png)
