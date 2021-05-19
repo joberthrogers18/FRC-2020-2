@@ -9,6 +9,8 @@
 
 ## Utilizando Makefile
 
+- Cada questão está em uma pasta e todas contém um Makefile
+
 Para gerar os executáveis:
 
 1 - ```make all```
